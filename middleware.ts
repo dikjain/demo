@@ -1,47 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { csp } from "./lib/csp"
 
 export function middleware(request: NextRequest) {
-  const cspHeader = `
-    default-src 'self';
-    script-src 'self' 'sha256-m6wbrNTn/zgKhSJMEQQYza1WOlrIYTbNQqOhFf0K3WU=' ;
-    style-src 'self' 'sha256-m6wbrNTn/zgKhSJMEQQYza1WOlrIYTbNQqOhFf0K3WU=' ;
-    img-src 'self' blob: data: https://userology-figma.s3.us-west-2.amazonaws.com;
-    font-src 'self' https://fonts.gstatic.com;
-    object-src 'none';
-    base-uri 'self';
-    form-action 'self';
-    frame-ancestors 'none';
-    connect-src 'self' https://securetoken.googleapis.com https://dev.userology.co https://dev.userologyai.com https://userology.info https://userologyai.com https://userology.co wss://*.userology.co https://www.figma.com https://embed.figma.com https://userology-figma.s3.us-west-2.amazonaws.com https://identitytoolkit.googleapis.com https://*.userologyai.com https://dev.userology.info https://*.userology.co https://*.userology.info https://api.mixpanel.com https://*.mxpnl.com https://api-js.mixpanel.com;
-    media-src 'self';
-    worker-src 'self';
-    manifest-src 'self';
-    child-src 'self';
-    frame-src 'self';
-    block-all-mixed-content;
-    upgrade-insecure-requests;
-  `
-
-  // Replace newline characters and spaces
-  const contentSecurityPolicyHeaderValue = cspHeader
-    .replace(/\s{2,}/g, ' ')
-    .trim()
-
-  const requestHeaders = new Headers(request.headers)
-  requestHeaders.set(
-    'Content-Security-Policy',
-    contentSecurityPolicyHeaderValue
-  )
-
-  const response = NextResponse.next({
-    request: {
-      headers: requestHeaders,
-    },
-  })
-  response.headers.set(
-    'Content-Security-Policy',
-    contentSecurityPolicyHeaderValue
-  )
-
+  const response = NextResponse.next()
+  csp(request, response)
   return response
 }
 
