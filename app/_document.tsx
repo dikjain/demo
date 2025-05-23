@@ -4,10 +4,11 @@ import Script from 'next/script'
 export default function Document({ nonce }: { nonce?: string }) {
   return (
     <Html lang="en">
-      <Head>
+      <Head nonce={nonce}>
         <Script
           id="nonce-script"
           nonce={nonce}
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `window.__NONCE__ = "${nonce}";`
           }}

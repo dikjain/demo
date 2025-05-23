@@ -21,8 +21,8 @@ export default function middleware(request: NextRequest) {
     'Content-Security-Policy',
     `
       default-src 'self';
-      script-src 'self' 'nonce-${nonce}' https://securetoken.googleapis.com https://dev.userology.co https://www.figma.com https://embed.figma.com https://identitytoolkit.googleapis.com https://*.userology.co https://*.userologyai.com https://*.userology.info https://cdn.mxpnl.com;
-      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https://securetoken.googleapis.com https://dev.userology.co https://www.figma.com https://embed.figma.com https://identitytoolkit.googleapis.com https://*.userology.co https://*.userologyai.com https://*.userology.info https://cdn.mxpnl.com;
+      style-src 'self' 'nonce-${nonce}' https://fonts.googleapis.com;
       img-src 'self' data: blob: https: https://userology-figma.s3.us-west-2.amazonaws.com;
       font-src 'self' https://fonts.gstatic.com;
       object-src 'none';
