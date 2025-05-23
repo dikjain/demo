@@ -4,7 +4,7 @@ export function middleware(request: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString('base64')
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'nonce-${nonce}' 'strict-dynamic';
+    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https://demo-pufb.vercel.app/_next/static/;
     style-src 'self' 'nonce-${nonce}';
     img-src 'self' blob: data: https://userology-figma.s3.us-west-2.amazonaws.com;
     font-src 'self' https://fonts.gstatic.com;
