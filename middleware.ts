@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from 'next/server'
 export function middleware(request: NextRequest) {
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'unsafe-eval' 'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo=' 'sha256-hBon3PqqS39pSofnUHcZ8dqrEcULNjUIBeTB8SKbC8s=' 'sha256-0makPRlKtUeA3XTzXbL9MnZywRkdKY8eWdrAqSwpmNc=';
-    style-src 'self' 'unsafe-inline';
+    script-src 'self' 'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo=' 'sha256-hBon3PqqS39pSofnUHcZ8dqrEcULNjUIBeTB8SKbC8s=' 'sha256-0makPRlKtUeA3XTzXbL9MnZywRkdKY8eWdrAqSwpmNc=';
+    style-src 'self' ;
     img-src 'self' blob: data: https://userology-figma.s3.us-west-2.amazonaws.com;
     font-src 'self' https://fonts.gstatic.com;
     object-src 'none';
