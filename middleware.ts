@@ -1,12 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 export function middleware(request: NextRequest) {
-  const nonce = Buffer.from(crypto.randomUUID()).toString('base64')
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'nonce-${nonce}' 'unsafe-eval';
-    script-src-elem 'self' 'nonce-${nonce}';
-    style-src 'self' 'nonce-${nonce}';
+    script-src 'self' 'unsafe-eval' 'sha256-OBTN3RiyCV4Bq7dFqZ5a2pAXjnCcCYeTJMO2I/LYKeo=' 'sha256-hBon3PqqS39pSofnUHcZ8dqrEcULNjUIBeTB8SKbC8s=' 'sha256-0makPRlKtUeA3XTzXbL9MnZywRkdKY8eWdrAqSwpmNc=';
+    style-src 'self' 'unsafe-inline';
     img-src 'self' blob: data: https://userology-figma.s3.us-west-2.amazonaws.com;
     font-src 'self' https://fonts.gstatic.com;
     object-src 'none';
@@ -29,8 +27,6 @@ export function middleware(request: NextRequest) {
     .trim()
 
   const requestHeaders = new Headers(request.headers)
-  requestHeaders.set('x-nonce', nonce)
-
   requestHeaders.set(
     'Content-Security-Policy',
     contentSecurityPolicyHeaderValue

@@ -1,14 +1,10 @@
 import { Html, Head, Main, NextScript } from 'next/document'
-import Script from 'next/script'
 
-export default function Document({ nonce }: { nonce?: string }) {
+export default function Document() {
   return (
     <Html lang="en">
-      <Head nonce={nonce}>
-        <Script
-          id="mixpanel-init"
-          strategy="beforeInteractive"
-          nonce={nonce}
+      <Head>
+        <script
           dangerouslySetInnerHTML={{
             __html: `
               window.mixpanel = window.mixpanel || [];
@@ -23,7 +19,7 @@ export default function Document({ nonce }: { nonce?: string }) {
       </Head>
       <body>
         <Main />
-        <NextScript nonce={nonce} />
+        <NextScript />
       </body>
     </Html>
   )
